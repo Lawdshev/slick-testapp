@@ -20,22 +20,17 @@ function Search() {
 
   return (
     <div className='w-[100vw] pl-[50px] py-[50px] md:pl-[67px] md:py-[67px]'>
-        <form className='w-full px-[10px] flex flex-col mb-6' onSubmit={()=>newSearch()}>
+        <form className='w-full px-[10px] flex flex-col mb-6' onSubmit={newSearch}>
             <label className='text-[16px] md:text-[24px]' >Search</label>
             <input type="text" value={input} onChange={(e)=>setInput(e.target.value)} className='w-[95%] border-[1px] border-solid border-black' />
         </form>
-        {
-            movies.length || series.length < 1
-            ?
-            <p className='text-center w-full'>Search for movie</p>
-            :
-            <>
+            
+           { movies.length > 0 && <>
             <h5 className='text-[18px] md:text-[24px] mb-2 md:mb-3'>Movies</h5>
             <MoviesDisplay search={movies}/>
             <h5 className='text-[18px] md:text-[24px] mb-2 md:mb-3 mt-6'>Series</h5>
             <MoviesDisplay search={series}/>
-            </>
-        }
+            </>}
     </div>
     
   )
