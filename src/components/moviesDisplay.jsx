@@ -1,9 +1,7 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import React,{useState} from 'react';
-import TopRated from "../cards/TopRated";
-import { useUserAuth } from '../utilities/UserAuthContextProvider';
-import ModalView from '../components/ModalView';
+import React from 'react';
+import MoviesCard from "./moviesCard";
 
    
 const responsive = {
@@ -14,7 +12,7 @@ const responsive = {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 3,
+      items: 2.5,
       slidesToSlide: 2 // optional, default to 1.
     },
     mobile: {
@@ -23,10 +21,10 @@ const responsive = {
       slidesToSlide: 1 // optional, default to 1.
     }
   };
-  const API_IMG = "https://image.tmdb.org/t/p/w500";
-function MoviesDisplay() {
-    const {search} = useUserAuth(); 
-    const {showModal, setShowModal,showDetails,activeMovie,closeModal} = useUserAuth();
+
+
+function MoviesDisplay({search}) {
+
 
   return (
     <>
@@ -49,12 +47,10 @@ function MoviesDisplay() {
         >
         {
             search.map(movies=>{
-                return <TopRated {...movies} key={movies.id}  showDetails={showDetails}/>
+                return <MoviesCard title={movies.Title}/>
             })
         }
     </Carousel>
-    <ModalView  showModal={showModal} setShowModal={setShowModal} closeModal={closeModal} overview={activeMovie.overview} img={API_IMG+activeMovie.poster_path} title={activeMovie.title} id={activeMovie.id } name={activeMovie.name}/>
-
     </>
   )
 }
