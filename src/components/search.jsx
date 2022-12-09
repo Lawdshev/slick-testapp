@@ -1,5 +1,4 @@
 import React, { useEffect,useState } from 'react'
-import axios from 'axios';
 import MoviesDisplay from './moviesDisplay';
 
 
@@ -14,8 +13,8 @@ function Search() {
 
     const newSearch = (e)=>{
         e.preventDefault()
-        axios.get(movieSearch_url).then(res=> setMovies( res.data.Search))
-        axios.get(seriesSearch_url).then(res=> setSeries( res.data.Search))
+        fetch(movieSearch_url).then(res=> res.json()).then(data=> setMovies(data.Search))
+        fetch(seriesSearch_url).then(res=>res.json())(data=> setSeries(data.Search))
     }
 
   return (
